@@ -2,6 +2,7 @@ package ru.atom.instantiation;
 
 import org.junit.Test;
 
+
 public class InstantiationTest {
 
     // Важно обратить внимание на блоки статической инициализации

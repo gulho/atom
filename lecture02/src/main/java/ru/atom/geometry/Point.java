@@ -3,23 +3,54 @@ package ru.atom.geometry;
 /**
  * Template class for
  */
-public class Point /* super class and interfaces here if necessary */ {
-    // fields
-    // and methods
+public class Point implements Collider {
+    private int x;
+    private int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
     /**
-     * @param o - other object to check equality with
+     * @param other - other object to check equality with
      * @return true if two points are equal and not null.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Point point = (Point) other;
 
-        // cast from Object to Point
-        Point point = (Point) o;
+        if (point.x == this.x && point.y == this.y) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-        // your code here
-        throw new UnsupportedOperationException();
+    @Override
+    public boolean isColliding(Collider other) {
+        if (this == other) return true;
+        if (other instanceof Bar) {
+            Bar bar = (Bar) other;
+            if ((this.x >= bar.getFirstCornerX() && this.x <= bar.getSecondCornerX())
+                || (this.x <= bar.getFirstCornerX() && this.x >= bar.getSecondCornerX())
+                    && (this.y >= bar.getFirstCornerY() && this.y <= bar.getSecondCornerY()) || (this.y <= bar.getFirstCornerY() && this.y >= bar.getSecondCornerY())
+            )
+                return true;
+            else
+                return false;
+        } else {
+            return true;
+        }
     }
 }
